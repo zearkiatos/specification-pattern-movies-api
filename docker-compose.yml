@@ -3,9 +3,9 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./MoviesApi/Dockerfile
     env_file:
-      - development.env
+      - ./MoviesApi/development.env
     container_name: movies-api
     ports:
       - "0.0.0.0:5050:5000"
