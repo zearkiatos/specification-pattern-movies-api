@@ -31,7 +31,8 @@ namespace MoviesApi.Controllers
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                Summary = Summaries[rng.Next(Summaries.Length)],
+                Environment = Environment.GetEnvironmentVariable("ASPNETCORE_BASE_YTS_URL")
             })
             .ToArray();
         }
