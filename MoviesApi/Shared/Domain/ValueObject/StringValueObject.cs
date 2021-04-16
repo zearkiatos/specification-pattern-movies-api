@@ -1,6 +1,6 @@
 namespace MoviesApi.Shared.Domain.ValueObject
 {
-    public class StringValueObject
+    abstract class StringValueObject
     {
         public StringValueObject(string value) 
         {
