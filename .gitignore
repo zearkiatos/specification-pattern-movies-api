@@ -1,0 +1,8 @@
+.DS_STORE
+bin
+obj
+out
+*.dll
+*.pdb
+MoviesApi.deps.json
+MoviesApi.runtimeconfig.json
