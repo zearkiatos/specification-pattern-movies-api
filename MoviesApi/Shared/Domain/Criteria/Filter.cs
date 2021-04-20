@@ -14,5 +14,25 @@ namespace MoviesApi.Shared
             this.operatorOption = operatorOption;
             this.value = value;
         }
+        public string Field
+        {
+            get { return field; }
+        }
+
+        public string OperatorOption
+        {
+            get { return operatorOption; }
+        }
+
+        public string Value
+        {
+            get { return value; }
+        }
+
+        public string Serialize()
+        {
+            return $"{this.field}.{this.operatorOption}.${this.value}";
+        }
+
     }
 }
