@@ -1,7 +1,6 @@
 using System;
 using Xunit;
 using System.Collections.Generic;
-using MoviesApi.Shared.Domain;
 namespace MoviesApi.Tests.Shared.Domain.Criteria
 {
     public class CriteriaUnitTest
