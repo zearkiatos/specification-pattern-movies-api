@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MoviesApi.Shared.Domain.Criteria
+namespace MoviesApi.Shared.Domain.Criterials
 {
     public class Criteria
     {
@@ -12,10 +12,10 @@ namespace MoviesApi.Shared.Domain.Criteria
 
         private List<string> filters;
 
-
+#nullable enable
         public Criteria(List<string> filters, string order, int offset, int limit)
         {
-            this.filters = filters;
+            this.filters = filters == null ? new List<string>() : filters;
             this.limit = limit;
             this.order = order;
             this.offset = offset;
@@ -53,8 +53,15 @@ namespace MoviesApi.Shared.Domain.Criteria
 
         public string Serialize()
         {
+            string serialized = "";
 
-            return $"{this.filters.ToString()}~~{this.order.ToString()}~~{this.offset}~~{this.limit}";
+            serialized += this.filters.Count > 0 ? $"{string.Join(",", this.filters.ToArray())}~~" : "";
+
+            serialized += string.IsNullOrEmpty(this.order) ? "" : $"{this.order}~~";
+
+            serialized += $"{this.offset}~~{this.limit}";
+
+            return serialized;
         }
 
 
