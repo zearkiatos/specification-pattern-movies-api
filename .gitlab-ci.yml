@@ -20,3 +20,4 @@ test-app:
   script:
     - echo "Testing the app 🧪"
     - dotnet test
+    
