@@ -6,3 +6,4 @@ out
 *.pdb
 MoviesApi.deps.json
 MoviesApi.runtimeconfig.json
+.vs
