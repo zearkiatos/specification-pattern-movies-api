@@ -3,6 +3,8 @@ WORKDIR /source
 COPY *.sln .
 COPY MoviesApi/*.csproj ./MoviesApi/
 COPY MoviesApi/. ./MoviesApi/
+COPY MoviesApi.Tests/*.csproj ./MoviesApi.Tests/
+COPY MoviesApi.Tests/. ./MoviesApi.Tests/
 RUN dotnet restore
 RUN dotnet publish -c release -o /app --no-restore
 
