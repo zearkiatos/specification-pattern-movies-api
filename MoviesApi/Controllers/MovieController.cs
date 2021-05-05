@@ -19,16 +19,6 @@ namespace MoviesApi.Controllers
         {
             MoviesApiRepository movieRepository = new MoviesApiRepository();
             var result = await movieRepository.SearchAll();
-            // var rng = new Random();
-            // return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            // {
-            //     Date = DateTime.Now.AddDays(index),
-            //     TemperatureC = rng.Next(-20, 55),
-            //     Summary = Summaries[rng.Next(Summaries.Length)],
-            //     Environment = Environment.GetEnvironmentVariable("ASPNETCORE_BASE_YTS_URL")
-            // })
-            // .ToArray();
-
             return result.ToArray();
         }
     }

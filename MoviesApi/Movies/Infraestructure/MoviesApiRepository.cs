@@ -24,7 +24,7 @@ namespace MoviesApi.Movies.Infraestructure
         {
             try
             {
-                List<Movie> result = new List<Movie>();
+                ResponseMovie result = new ResponseMovie();
                 HttpResponseMessage response = new HttpResponseMessage();
 
                 response = await this.client.GetAsync("list_movies.json?movie_id");
@@ -33,9 +33,9 @@ namespace MoviesApi.Movies.Infraestructure
                 {
                     string jsonStr = await response.Content.ReadAsStringAsync();
 
-                    result = JsonConvert.DeserializeObject<Movie>(jsonStr);
+                    result = JsonConvert.DeserializeObject<ResponseMovie>(jsonStr);
                 }
-                return await Task.Run(() => { return result; });
+                return await Task.Run(() => { return result.Data.Movies; });
             }
             catch (HttpRequestException ex)
             {
