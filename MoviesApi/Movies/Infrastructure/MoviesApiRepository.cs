@@ -7,15 +7,16 @@ using MoviesApi.Shared.Domain.Criterials;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Configuration;
-namespace MoviesApi.Movies.Infraestructure
+namespace MoviesApi.Movies.Infrastructure
 {
     public class MoviesApiRepository : MovieRepository
     {
 
-        private HttpClient client = new HttpClient();
+        private HttpClient client;
 
-        public MoviesApiRepository()
+        public MoviesApiRepository(HttpClient client)
         {
+            this.client = client;
             this.client.BaseAddress = new Uri(Constants.BASE_YTS_URL);
             this.client.DefaultRequestHeaders.Add("Accept", "application/json");
             this.client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

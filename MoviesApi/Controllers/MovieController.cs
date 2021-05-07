@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MoviesApi.Movies.Domain;
-using MoviesApi.Movies.Infraestructure;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using MoviesApi.Movies.Infrastructure;
 
 namespace MoviesApi.Controllers
 {
@@ -17,7 +19,8 @@ namespace MoviesApi.Controllers
         [HttpGet]
         public async Task<Array> Get()
         {
-            MoviesApiRepository movieRepository = new MoviesApiRepository();
+            HttpClient httpClient = new HttpClient();
+            MoviesApiRepository movieRepository = new MoviesApiRepository(httpClient);
             var result = await movieRepository.SearchAll();
             return result.ToArray();
         }
