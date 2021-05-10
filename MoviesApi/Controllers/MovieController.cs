@@ -17,12 +17,12 @@ namespace MoviesApi.Controllers
     {
 
         [HttpGet]
-        public async Task<Array> Get()
+        public async Task<IActionResult> Get()
         {
             HttpClient httpClient = new HttpClient();
             MoviesApiRepository movieRepository = new MoviesApiRepository(httpClient);
             var result = await movieRepository.SearchAll();
-            return result.ToArray();
+            return Ok(result);
         }
     }
 }
