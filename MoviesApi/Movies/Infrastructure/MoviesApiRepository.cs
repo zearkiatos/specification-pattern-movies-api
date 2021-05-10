@@ -6,7 +6,7 @@ using MoviesApi.Movies.Domain;
 using MoviesApi.Shared.Domain.Criterials;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Configuration;
+using MoviesApi.Configuration;
 namespace MoviesApi.Movies.Infrastructure
 {
     public class MoviesApiRepository : MovieRepository

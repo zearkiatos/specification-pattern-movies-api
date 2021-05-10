@@ -24,7 +24,7 @@ namespace MoviesApi.Tests.Movies.Infrastructure
             var response = new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(MoviesMock.MOVIES_ONE_RESPONSE, Encoding.UTF8, "application/json")
+                Content = new StringContent(MoviesMock.MovieOneResponseMock().ToString(), Encoding.UTF8, "application/json")
             };
 
             handlerMock.Protected().Setup<Task<HttpResponseMessage>>(
@@ -39,6 +39,12 @@ namespace MoviesApi.Tests.Movies.Infrastructure
             var result = await moviesApiRepository.SearchAll();
 
             Assert.NotNull(result);
+            Assert.Equal(result.Count, 1);
+            Assert.True(result.Exists(m => m.Id == 31506));
+            Movie movie = result.Find(m => m.Id == 31506);
+            Assert.Equal(movie.Description, "Hyunjuli, who accidentally falls into a fantasy world of the Moonlit Palace, fights against the evil Blossom Lady to protect her new friends.");
+            Assert.Equal(movie.BackgroundImage, "https://yts.mx/assets/images/movies/lost_in_the_moonlight_2016/background.jpg");
+            Assert.Equal(movie.YoutubeTrailerCode, "https://youtu.be/5uJikUpZB8U");
         }
     }
 }

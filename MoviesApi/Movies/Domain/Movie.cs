@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using MoviesApi.Configuration;
 
 namespace MoviesApi.Movies.Domain
 {
@@ -74,7 +75,7 @@ namespace MoviesApi.Movies.Domain
         private string youtubeTrailerCode;
         public string YoutubeTrailerCode
         {
-            get { return youtubeTrailerCode; }
+            get { return $"{Constants.BASE_SHORT_YOUTUBE_URL}{youtubeTrailerCode}"; }
         }
         [JsonProperty("background_image")]
         private string backgroundImage;

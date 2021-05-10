@@ -1,7 +1,81 @@
+using Newtonsoft.Json.Linq;
 namespace MoviesApi.Tests.Movies.Infrastructure.Mock
 {
     abstract class MoviesMock
     {
-        public const string MOVIES_ONE_RESPONSE = @"{'status':'ok','status_message':'Querywassuccessful','data':{'movie_count':30810,'limit':20,'page_number':1,'movies':[{'id':31406,'url':'https://yts.mx/movies/locked-in-2021','imdb_code':'tt6439792','title':'LockedIn','title_english':'LockedIn','title_long':'LockedIn(2021)','slug':'locked-in-2021','year':2021,'rating':6,'runtime':90,'genres':['Crime','Drama','Thriller'],'summary':'Maggie,asinglemomwhoisstrugglingtomakeendsmeet,islivingwithherteenagedaughterinarundownmotelandfacingimpendingeviction.Sheworksatastoragefacilitywheresheandherdaughterarecaughtinthemiddleofashadydealgonewrongbetweenherbossandtwocriminalsresultinginthemurderofherboss.Themomanddaughtermustretreatintothefacility'smazeofcorridorsastheyarepursuedbythetwocriminals,whoareinsearchofstolendiamondswhicharestashedsomewhereinsideofthefacility.Inordertosurviveandprotectherdaughter,Maggiemustutilizeherintimateknowledgeofthefacilitytoremainastepaheadofherdangerousperpetrators.','description_full':'Maggie,asinglemomwhoisstrugglingtomakeendsmeet,islivingwithherteenagedaughterinarundownmotelandfacingimpendingeviction.Sheworksatastoragefacilitywheresheandherdaughterarecaughtinthemiddleofashadydealgonewrongbetweenherbossandtwocriminalsresultinginthemurderofherboss.Themomanddaughtermustretreatintothefacility'smazeofcorridorsastheyarepursuedbythetwocriminals,whoareinsearchofstolendiamondswhicharestashedsomewhereinsideofthefacility.Inordertosurviveandprotectherdaughter,Maggiemustutilizeherintimateknowledgeofthefacilitytoremainastepaheadofherdangerousperpetrators.','synopsis':'Maggie,asinglemomwhoisstrugglingtomakeendsmeet,islivingwithherteenagedaughterinarundownmotelandfacingimpendingeviction.Sheworksatastoragefacilitywheresheandherdaughterarecaughtinthemiddleofashadydealgonewrongbetweenherbossandtwocriminalsresultinginthemurderofherboss.Themomanddaughtermustretreatintothefacility'smazeofcorridorsastheyarepursuedbythetwocriminals,whoareinsearchofstolendiamondswhicharestashedsomewhereinsideofthefacility.Inordertosurviveandprotectherdaughter,Maggiemustutilizeherintimateknowledgeofthefacilitytoremainastepaheadofherdangerousperpetrators.','yt_trailer_code':'6bjhfN6TJ_U','language':'en','mpa_rating':'R','background_image':'https://yts.mx/assets/images/movies/locked_in_2021/background.jpg','background_image_original':'https://yts.mx/assets/images/movies/locked_in_2021/background.jpg','small_cover_image':'https://yts.mx/assets/images/movies/locked_in_2021/small-cover.jpg','medium_cover_image':'https://yts.mx/assets/images/movies/locked_in_2021/medium-cover.jpg','large_cover_image':'https://yts.mx/assets/images/movies/locked_in_2021/large-cover.jpg','state':'ok','torrents':[{'url':'https://yts.mx/torrent/download/31A9C4F118BD571FF41E347BD0CFE3C120FECC08','hash':'31A9C4F118BD571FF41E347BD0CFE3C120FECC08','quality':'720p','type':'web','seeds':0,'peers':0,'size':'790.16MB','size_bytes':828542812,'date_uploaded':'2021-05-0620:53:03','date_uploaded_unix':1620327183},{'url':'https://yts.mx/torrent/download/9ECAE2DDC48FC7E832215712AFBF99E3AD8D1C46','hash':'9ECAE2DDC48FC7E832215712AFBF99E3AD8D1C46','quality':'1080p','type':'web','seeds':0,'peers':0,'size':'1.59GB','size_bytes':1707249500,'date_uploaded':'2021-05-0621:38:38','date_uploaded_unix':1620329918}],'date_uploaded':'2021-05-0620:53:03','date_uploaded_unix':1620327183}]}}";
+
+        public static JObject MovieOneResponseMock()
+        {
+            var json = JObject.Parse(MOVIES_ONE_RESPONSE);
+            return json;
+        }
+
+        private const string MOVIES_ONE_RESPONSE = @"{
+    'status': 'ok',
+    'status_message': 'Query was successful',
+    'data': {
+        'movie_count': 30905,
+        'limit': 20,
+        'page_number': 1,
+        'movies': [
+            {
+                'id': 31506,
+                'url': 'https://yts.mx/movies/lost-in-the-moonlight-2016',
+                'imdb_code': 'tt6043124',
+                'title': 'Lost in the Moonlight',
+                'title_english': 'Lost in the Moonlight',
+                'title_long': 'Lost in the Moonlight (2016)',
+                'slug': 'lost-in-the-moonlight-2016',
+                'year': 2016,
+                'rating': 6,
+                'runtime': 80,
+                'genres': [
+                    'Animation'
+                ],
+                'summary': 'Hyunjuli, who accidentally falls into a fantasy world of the Moonlit Palace, fights against the evil Blossom Lady to protect her new friends.',
+                'description_full': 'Hyunjuli, who accidentally falls into a fantasy world of the Moonlit Palace, fights against the evil Blossom Lady to protect her new friends.',
+                'synopsis': 'Hyunjuli, who accidentally falls into a fantasy world of the Moonlit Palace, fights against the evil Blossom Lady to protect her new friends.',
+                'yt_trailer_code': '5uJikUpZB8U',
+                'language': 'ko',
+                'mpa_rating': '',
+                'background_image': 'https://yts.mx/assets/images/movies/lost_in_the_moonlight_2016/background.jpg',
+                'background_image_original': 'https://yts.mx/assets/images/movies/lost_in_the_moonlight_2016/background.jpg',
+                'small_cover_image': 'https://yts.mx/assets/images/movies/lost_in_the_moonlight_2016/small-cover.jpg',
+                'medium_cover_image': 'https://yts.mx/assets/images/movies/lost_in_the_moonlight_2016/medium-cover.jpg',
+                'large_cover_image': 'https://yts.mx/assets/images/movies/lost_in_the_moonlight_2016/large-cover.jpg',
+                'state': 'ok',
+                'torrents': [
+                    {
+                        'url': 'https://yts.mx/torrent/download/E973262DA7C657AA8DF4D132184B09CD80F03D5D',
+                        'hash': 'E973262DA7C657AA8DF4D132184B09CD80F03D5D',
+                        'quality': '720p',
+                        'type': 'web',
+                        'seeds': 0,
+                        'peers': 0,
+                        'size': '744.51 MB',
+                        'size_bytes': 780675318,
+                        'date_uploaded': '2021-05-09 14:50:42',
+                        'date_uploaded_unix': 1620564642
+                    },
+                    {
+                        'url': 'https://yts.mx/torrent/download/6963C909606D756BA6F8AD9FDEA93D8470A736E4',
+                        'hash': '6963C909606D756BA6F8AD9FDEA93D8470A736E4',
+                        'quality': '1080p',
+                        'type': 'web',
+                        'seeds': 0,
+                        'peers': 0,
+                        'size': '1.35 GB',
+                        'size_bytes': 1449551462,
+                        'date_uploaded': '2021-05-09 15:40:55',
+                        'date_uploaded_unix': 1620567655
+                    }
+                ],
+                'date_uploaded': '2021-05-09 14:50:42',
+                'date_uploaded_unix': 1620564642
+            }
+        ]
+    }
+}";
+
     }
 }
