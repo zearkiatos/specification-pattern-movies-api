@@ -7,3 +7,4 @@ out
 MoviesApi.deps.json
 MoviesApi.runtimeconfig.json
 .vs
+.env

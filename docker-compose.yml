@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./MoviesApi/Dockerfile
     env_file:
-      - ./MoviesApi/development.env
+      - ./MoviesApi/.env
     container_name: movies-api
     ports:
       - "0.0.0.0:8080:80"

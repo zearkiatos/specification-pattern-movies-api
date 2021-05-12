@@ -12,5 +12,5 @@ RUN dotnet publish -c release -o /app --no-restore
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /app .
-EXPOSE 80
-ENTRYPOINT ["dotnet", "MoviesApi.dll",  "--urls", "http://*:80"]
+EXPOSE $PORT
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet MoviesApi.dll
