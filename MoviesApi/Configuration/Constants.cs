@@ -8,5 +8,7 @@ namespace MoviesApi.Configuration
         public static string ENVIRONMENT = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
         public static string BASE_SHORT_YOUTUBE_URL = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNETCORE_BASE_SHORT_YOUTUBE_URL")) ? "https://youtu.be/" : Environment.GetEnvironmentVariable("ASPNETCORE_BASE_SHORT_YOUTUBE_URL");
+
+        public static int DEFAULT_LIMIT = String.IsNullOrEmpty(Environment.GetEnvironmentVariable("ASPNETCORE_DEFAULT_LIMIT")) ? 100 : int.Parse(Environment.GetEnvironmentVariable("ASPNETCORE_DEFAULT_LIMIT"));
     }
 }

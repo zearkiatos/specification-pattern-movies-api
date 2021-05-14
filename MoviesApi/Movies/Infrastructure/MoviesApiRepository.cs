@@ -28,7 +28,7 @@ namespace MoviesApi.Movies.Infrastructure
                 ResponseMovie result = new ResponseMovie();
                 HttpResponseMessage response = new HttpResponseMessage();
 
-                response = await this.client.GetAsync("list_movies.json?movie_id");
+                response = await this.client.GetAsync($"list_movies.json?limit={Constants.DEFAULT_LIMIT}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -48,9 +48,30 @@ namespace MoviesApi.Movies.Infrastructure
             }
         }
 
-        public Task<List<Movie>> SearchByCriteria(Criteria criteria)
+        async public Task<List<Movie>> SearchByCriteria(Criteria criteria)
         {
-            return null;
+            try
+            {
+                ResponseMovie result = new ResponseMovie();
+                HttpResponseMessage response = new HttpResponseMessage();
+
+                response = await this.client.GetAsync($"list_movies.json?limit={criteria.Limit}");
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonStr = await response.Content.ReadAsStringAsync();
+
+                    result = JsonConvert.DeserializeObject<ResponseMovie>(jsonStr);
+                }
+                return await Task.Run(() => { return result.Data.Movies; });
+            }
+            catch (HttpRequestException ex)
+            {
+                throw new Exception(string.Format("Error {0}", ex.Message));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Error {0}", ex.Message));
+            }
         }
     }
 }
