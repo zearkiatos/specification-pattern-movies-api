@@ -5,7 +5,7 @@
 
 **Step 1:**
 - Create a docker image
-docker build . -f heroku.dockerfile -t sp-movies-api
+docker build . -f heroku.Dockerfile -t sp-movies-api
 
 **Step 2**
 - Login in heroku
