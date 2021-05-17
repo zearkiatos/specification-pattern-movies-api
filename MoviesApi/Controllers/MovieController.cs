@@ -26,11 +26,13 @@ namespace MoviesApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet("ByCriterial")]
-        public async Task<IActionResult> GetByCriterial(Criteria criterial)
+        [HttpGet]
+        [Route("ByCriterial")]
+        public async Task<IActionResult> GetByCriterial([FromBody] CriterialRequest criterialRequest)
         {
             HttpClient httpClient = new HttpClient();
             MoviesApiRepository movieRepository = new MoviesApiRepository(httpClient);
+            Criteria criterial = new Criteria(null,criterialRequest.Order,criterialRequest.Offset,criterialRequest.Limit);
             var result = await movieRepository.SearchByCriteria(criterial);
             return Ok(result);
         }

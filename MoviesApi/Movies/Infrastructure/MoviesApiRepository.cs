@@ -55,7 +55,7 @@ namespace MoviesApi.Movies.Infrastructure
                 ResponseMovie result = new ResponseMovie();
                 HttpResponseMessage response = new HttpResponseMessage();
 
-                response = await this.client.GetAsync($"list_movies.json?limit={criteria.Limit}");
+                response = await this.client.GetAsync($"list_movies.json?${this.QueryMapper(criteria)}");
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonStr = await response.Content.ReadAsStringAsync();
@@ -72,6 +72,36 @@ namespace MoviesApi.Movies.Infrastructure
             {
                 throw new Exception(string.Format("Error {0}", ex.Message));
             }
+        }
+
+        public string QueryMapper(Criteria criteria)
+        {
+            string criteriaMapped = "";
+            
+            if (criteria.Limit > 0)
+                criteriaMapped += $"?limit={criteria.Limit}";
+            else
+                criteriaMapped += $"?limit={Configuration.Constants.DEFAULT_LIMIT}";
+
+            if (criteria.HasOrder())
+            {
+                criteriaMapped += $"&order_by={criteria.Order}";
+            }
+            else 
+            {
+                criteriaMapped += $"&order=asc";
+            }
+
+            if (criteria.Offset > 0)
+            {
+                criteriaMapped += $"&page={criteria.Offset}";
+            }
+            else 
+            {
+                criteriaMapped += $"&page=1";
+            }
+
+            return criteriaMapped;
         }
     }
 }
