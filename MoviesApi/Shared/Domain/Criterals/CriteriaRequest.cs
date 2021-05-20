@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 namespace MoviesApi.Shared.Domain.Criterials
 {
@@ -26,6 +27,16 @@ namespace MoviesApi.Shared.Domain.Criterials
             get { return offset; }
             set { offset = value; }
         }
+
+        [JsonProperty("filters")]
+
+        private List<string> filters;
+        public List<string> Filters
+        {
+            get { return filters; }
+            set { filters = value; }
+        }
+        
         
         
         
