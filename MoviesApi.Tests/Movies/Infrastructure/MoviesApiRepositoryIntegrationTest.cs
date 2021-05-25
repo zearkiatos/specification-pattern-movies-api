@@ -57,7 +57,7 @@ namespace MoviesApi.Tests.Movies.Infrastructure
                 StatusCode = HttpStatusCode.OK,
                 Content = new StringContent(MoviesMock.MovieLimitTenMock().ToString(), Encoding.UTF8, "application/json")
             };
-            Criteria criteria = new Criteria(new List<string>(),"",1, 10);
+            Criteria criteria = new Criteria(new List<Filter>(),"",1, 10);
 
             handlerMock.Protected().Setup<Task<HttpResponseMessage>>(
                   "SendAsync",

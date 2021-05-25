@@ -9,9 +9,9 @@ namespace MoviesApi.Tests.Shared.Domain.Criterials
         [Fact]
         public void Should_DeclarateCriteria_And_Return_Associate_Data()
         {
-            List<string> filters = new List<string>();
-            filters.Add("filter1 == 1");
-            filters.Add("filter2 <> 2");
+            List<Filter> filters = new List<Filter>();
+            filters.Add(new Filter{FilterField = "filter1", FilterOperator = "==", FilterValue = "1" });
+            filters.Add(new Filter{FilterField = "filter2", FilterOperator = "<>", FilterValue = "2" });
             string order = "ascendent";
             int offset = 20;
             int limit = 100;
@@ -21,7 +21,7 @@ namespace MoviesApi.Tests.Shared.Domain.Criterials
             Assert.True(criteria.HasFilters());
             Assert.True(criteria.HasOrder());
             Assert.Equal(criteria.PlainFilters().Length,2);
-            Assert.Equal(criteria.Serialize(), "filter1 == 1,filter2 <> 2~~ascendent~~20~~100");
+            Assert.Equal(criteria.Serialize(), "filter1 == 1,filter2 <> 2,~~ascendent~~20~~100");
         }
 
         [Fact]
@@ -40,9 +40,9 @@ namespace MoviesApi.Tests.Shared.Domain.Criterials
         [Fact]
         public void Should_Return_False_If_Criteria_DoNotHave_Orders()
         {
-            List<string> filters = new List<string>();
-            filters.Add("filter1 == 1");
-            filters.Add("filter2 <> 2");
+            List<Filter> filters = new List<Filter>();
+            filters.Add(new Filter{FilterField = "filter1", FilterOperator = "==", FilterValue = "1" });
+            filters.Add(new Filter{FilterField = "filter2", FilterOperator = "<>", FilterValue = "2" });
             int offset = 4;
             int limit = 5;
 
@@ -51,7 +51,7 @@ namespace MoviesApi.Tests.Shared.Domain.Criterials
             Assert.True(criteria.HasFilters());
             Assert.False(criteria.HasOrder());
             Assert.Equal(criteria.PlainFilters().Length,2);
-            Assert.Equal(criteria.Serialize(), "filter1 == 1,filter2 <> 2~~4~~5");
+            Assert.Equal(criteria.Serialize(), "filter1 == 1,filter2 <> 2,~~4~~5");
         }
     }
 }

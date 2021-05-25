@@ -10,12 +10,12 @@ namespace MoviesApi.Shared.Domain.Criterials
 
         private string order;
 
-        private List<string> filters;
+        private List<Filter> filters;
 
 #nullable enable
-        public Criteria(List<string> filters, string order, int offset, int limit)
+        public Criteria(List<Filter> filters, string order, int offset, int limit)
         {
-            this.filters = filters == null ? new List<string>() : filters;
+            this.filters = filters == null ? new List<Filter>() : filters;
             this.limit = limit;
             this.order = order;
             this.offset = offset;
@@ -31,7 +31,7 @@ namespace MoviesApi.Shared.Domain.Criterials
             return !string.IsNullOrEmpty(this.order);
         }
 
-        public string[] PlainFilters()
+        public Filter[] PlainFilters()
         {
             return this.filters.ToArray();
         }
@@ -51,11 +51,21 @@ namespace MoviesApi.Shared.Domain.Criterials
             get { return limit; }
         }
 
+        public string FilterSerialization()
+        {
+            string filterSerialized = "";
+            foreach(var filter in this.filters) {
+                filterSerialized+=$"{filter.Serialization()},";
+            }
+
+            return filterSerialized;
+        }
+
         public string Serialize()
         {
             string serialized = "";
 
-            serialized += this.filters.Count > 0 ? $"{string.Join(",", this.filters.ToArray())}~~" : "";
+            serialized += this.filters.Count > 0 ? $"{this.FilterSerialization()}~~" : "";
 
             serialized += string.IsNullOrEmpty(this.order) ? "" : $"{this.order}~~";
 
