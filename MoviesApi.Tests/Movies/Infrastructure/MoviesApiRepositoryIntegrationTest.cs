@@ -76,5 +76,37 @@ namespace MoviesApi.Tests.Movies.Infrastructure
             Assert.Equal(result.Find(m => m.Id == 31660).BackgroundImage, "https://yts.mx/assets/images/movies/the_kings_case_note_2017/background.jpg");
             Assert.Equal(result.Find(m => m.Id == 31661).YoutubeTrailerCode, "https://youtu.be/");
         }
+
+        [Fact]
+        public async void Should_Return_Movies_List_With_Filter_By_Movie_Title()
+        {
+            var handlerMock = new Mock<HttpMessageHandler>();
+            var response = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(MoviesMock.MovieLimitTenMock().ToString(), Encoding.UTF8, "application/json")
+            };
+            List<Filter> filters = new List<Filter>();
+            filters.Add(new Filter(){FilterField = "title", FilterOperator = "==", FilterValue = "When Today "});
+            Criteria criteria = new Criteria(filters,"",1, 10);
+
+            handlerMock.Protected().Setup<Task<HttpResponseMessage>>(
+                  "SendAsync",
+                  ItExpr.IsAny<HttpRequestMessage>(),
+                  ItExpr.IsAny<CancellationToken>())
+               .ReturnsAsync(response);
+
+            var httpClient = new HttpClient(handlerMock.Object);
+            var moviesApiRepository = new MoviesApiRepository(httpClient);
+
+            var result = await moviesApiRepository.SearchByCriteria(criteria);
+            Assert.NotNull(result);
+            Assert.Equal(result.Count, 1);
+            Assert.True(result.Exists(m => m.Id == 31659));
+            Assert.Equal(result.Find(m => m.Id == 31659).Title, "When Today Ends");
+            Assert.Equal(result.Find(m => m.Id == 31659).Description, "Lorem Ipsum");
+            Assert.Equal(result.Find(m => m.Id == 31659).BackgroundImage, "https://yts.mx/assets/images/movies/when_today_ends_2021/background.jpg");
+            Assert.Equal(result.Find(m => m.Id == 31659).YoutubeTrailerCode, "https://youtu.be/");
+        }
     }
 }

@@ -30,8 +30,8 @@ namespace MoviesApi.Shared.Domain.Criterials
 
         [JsonProperty("filters")]
 
-        private List<string> filters;
-        public List<string> Filters
+        private List<FilterRequest> filters;
+        public List<FilterRequest> Filters
         {
             get { return filters; }
             set { filters = value; }

@@ -51,6 +51,11 @@ namespace MoviesApi.Shared.Domain.Criterials
             get { return limit; }
         }
 
+        public List<Filter>  Filters
+        {
+            get { return filters; }
+        }
+
         public string FilterSerialization()
         {
             string filterSerialized = "";
