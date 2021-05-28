@@ -1,12 +1,12 @@
 using System;
+using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
-using Microsoft.CodeAnalysis.Scripting;
-
+using System.Security.Claims;
 namespace MoviesApi.Shared.Utils 
 {
-    public abstract class FilterHelper<T>
+    public class FilterHelper<T>
     {
         public static async Task<Func<T, bool>> ConvertStringToPredicate (string filter) 
         {

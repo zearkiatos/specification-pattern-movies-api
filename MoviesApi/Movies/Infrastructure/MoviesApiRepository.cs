@@ -64,7 +64,8 @@ namespace MoviesApi.Movies.Infrastructure
 
                     responseMovie = JsonConvert.DeserializeObject<ResponseMovie>(jsonStr);
 
-                    movies = criteria.HasFilters() ? FilterFieldMapper(responseMovie.Data.Movies, criteria.Filters) : responseMovie.Data.Movies;
+                    // movies = criteria.HasFilters() ? FilterFieldMapper(responseMovie.Data.Movies, criteria.Filters) : responseMovie.Data.Movies;
+                    movies = responseMovie.Data.Movies;
                 }
                 return await Task.Run(() => { return movies; });
             }
