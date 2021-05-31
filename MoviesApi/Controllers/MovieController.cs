@@ -32,9 +32,22 @@ namespace MoviesApi.Controllers
         {
             HttpClient httpClient = new HttpClient();
             MoviesApiRepository movieRepository = new MoviesApiRepository(httpClient);
-            Criteria criterial = new Criteria(null,criterialRequest.Order,criterialRequest.Offset,criterialRequest.Limit);
+            List<Filter> filters = FiltersMap(criterialRequest.Filters);
+            Criteria criterial = new Criteria(filters,criterialRequest.Order,criterialRequest.Offset,criterialRequest.Limit);
             var result = await movieRepository.SearchByCriteria(criterial);
             return Ok(result);
+        }
+
+        public List<Filter> FiltersMap(List<FilterRequest> filters) {
+            if (filters == null)
+                return null;
+            var filterMapped = filters.Select(filter => new Filter(){
+                FilterField = filter.FilterField,
+                FilterOperator = filter.FilterOperator,
+                FilterValue = filter.FilterValue
+            }).ToList();
+
+            return filterMapped;
         }
     }
 }
