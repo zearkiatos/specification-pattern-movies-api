@@ -7,6 +7,7 @@ using MoviesApi.Shared.Domain.Criterials;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using MoviesApi.Configuration;
+using MoviesApi.Shared.Utils;
 using System.Linq;
 namespace MoviesApi.Movies.Infrastructure
 {
@@ -64,8 +65,7 @@ namespace MoviesApi.Movies.Infrastructure
 
                     responseMovie = JsonConvert.DeserializeObject<ResponseMovie>(jsonStr);
 
-                    // movies = criteria.HasFilters() ? FilterFieldMapper(responseMovie.Data.Movies, criteria.Filters) : responseMovie.Data.Movies;
-                    movies = responseMovie.Data.Movies;
+                    movies = criteria.HasFilters() ? await FilterFieldMapper(responseMovie.Data.Movies, criteria.Filters) : responseMovie.Data.Movies;
                 }
                 return await Task.Run(() => { return movies; });
             }
@@ -79,15 +79,26 @@ namespace MoviesApi.Movies.Infrastructure
             }
         }
 
-        // public List<Movie> FilterFieldMapper(List<Movie> movies, List<Filter> filters)
-        // {
-        //     List<Movie> movieFilered = movies;
-        //     foreach(var filter in filters)
-        //     {
-        //         var queryBuilded = $"{filter.FilterField} {filter.FilterOperator} {filter.FilterValue}";
-        //         movieFilered = movieFilered.Where(queryBuilded).ToList();
-        //     }
-        // }
+        public async Task<List<Movie>> FilterFieldMapper(List<Movie> movies, List<Filter> filters)
+        {
+            List<Movie> movieFilered = movies;
+            foreach(var filter in filters)
+            {
+                string queryBuilded = this.FilterMapper(filter.FilterField, filter.FilterOperator, filter.FilterValue);
+                var expression = await MovieFilterHelper.ConvertStringToPredicate(queryBuilded);
+                movieFilered = movieFilered.Where(expression).ToList();
+            }
+
+            return Task.Run(() => movieFilered).Result;
+        }
+
+        public string FilterMapper(string filterField, string filterOperator, string filterValue) 
+        {
+            if (filterOperator == "like")
+                return $"movie => movie.{filterField}.Contains(\"{filterValue}\")";
+
+            return $"movie => movie.{filterField} {filterOperator} {filterValue}";
+        }
 
         public string QueryMapper(Criteria criteria)
         {
