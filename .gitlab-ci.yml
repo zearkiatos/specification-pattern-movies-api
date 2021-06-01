@@ -1,0 +1,22 @@
+image: mcr.microsoft.com/dotnet/sdk:5.0
+stages:
+  - install
+  - test
+
+install-dependencies:
+  stage: install
+  script:
+    - dotnet restore
+    - dotnet publish -c release -o /app --no-restore
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - /
+
+test-app:
+  stage: test
+  dependencies:
+    - install-dependencies
+  script:
+    - echo "Testing the app 🧪"
+    - dotnet test

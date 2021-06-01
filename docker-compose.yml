@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./MoviesApi/Dockerfile
+    env_file:
+      - ./MoviesApi/.env
+    container_name: movies-api
+    ports:
+      - "0.0.0.0:8080:80"
+    volumes:
+      - .:/source
+    expose:
+      - "80"
