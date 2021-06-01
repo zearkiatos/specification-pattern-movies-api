@@ -23,7 +23,7 @@ namespace MoviesApi.Movies.Infrastructure
             this.client.DefaultRequestHeaders.Add("Accept", "application/json");
             this.client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
-        async public Task<List<Movie>> SearchAll()
+        async public Task<DataMovie> SearchAll()
         {
             try
             {
@@ -38,7 +38,7 @@ namespace MoviesApi.Movies.Infrastructure
 
                     result = JsonConvert.DeserializeObject<ResponseMovie>(jsonStr);
                 }
-                return await Task.Run(() => { return result.Data.Movies; });
+                return await Task.Run(() => { return result.Data; });
             }
             catch (HttpRequestException ex)
             {
@@ -50,12 +50,12 @@ namespace MoviesApi.Movies.Infrastructure
             }
         }
 
-        async public Task<List<Movie>> SearchByCriteria(Criteria criteria)
+        async public Task<DataMovie> SearchByCriteria(Criteria criteria)
         {
             try
             {
                 ResponseMovie responseMovie = new ResponseMovie();
-                List<Movie> movies = new List<Movie>();
+                DataMovie data = new DataMovie();
                 HttpResponseMessage response = new HttpResponseMessage();
 
                 response = await this.client.GetAsync($"list_movies.json?${this.QueryMapper(criteria)}");
@@ -65,9 +65,10 @@ namespace MoviesApi.Movies.Infrastructure
 
                     responseMovie = JsonConvert.DeserializeObject<ResponseMovie>(jsonStr);
 
-                    movies = criteria.HasFilters() ? await FilterFieldMapper(responseMovie.Data.Movies, criteria.Filters) : responseMovie.Data.Movies;
+                    data.Movies = criteria.HasFilters() ? await FilterFieldMapper(responseMovie.Data.Movies, criteria.Filters) : responseMovie.Data.Movies;
+
                 }
-                return await Task.Run(() => { return movies; });
+                return await Task.Run(() => { return data; });
             }
             catch (HttpRequestException ex)
             {

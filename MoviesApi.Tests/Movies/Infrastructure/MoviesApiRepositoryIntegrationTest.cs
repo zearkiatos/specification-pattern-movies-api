@@ -40,9 +40,9 @@ namespace MoviesApi.Tests.Movies.Infrastructure
             var result = await moviesApiRepository.SearchAll();
 
             Assert.NotNull(result);
-            Assert.Equal(result.Count, 1);
-            Assert.True(result.Exists(m => m.Id == 31506));
-            Movie movie = result.Find(m => m.Id == 31506);
+            Assert.Equal(result.Movies.Count, 1);
+            Assert.True(result.Movies.Exists(m => m.Id == 31506));
+            Movie movie = result.Movies.Find(m => m.Id == 31506);
             Assert.Equal(movie.Description, "Hyunjuli, who accidentally falls into a fantasy world of the Moonlit Palace, fights against the evil Blossom Lady to protect her new friends.");
             Assert.Equal(movie.BackgroundImage, "https://yts.mx/assets/images/movies/lost_in_the_moonlight_2016/background.jpg");
             Assert.Equal(movie.YoutubeTrailerCode, "https://youtu.be/5uJikUpZB8U");
@@ -70,11 +70,11 @@ namespace MoviesApi.Tests.Movies.Infrastructure
 
             var result = await moviesApiRepository.SearchByCriteria(criteria);
             Assert.NotNull(result);
-            Assert.Equal(result.Count, 10);
-            Assert.True(result.Exists(m => m.Id == 31663));
-            Assert.Equal(result.Find(m => m.Id == 31663).Description, "Lorem Ipsum");
-            Assert.Equal(result.Find(m => m.Id == 31660).BackgroundImage, "https://yts.mx/assets/images/movies/the_kings_case_note_2017/background.jpg");
-            Assert.Equal(result.Find(m => m.Id == 31661).YoutubeTrailerCode, "https://youtu.be/");
+            Assert.Equal(result.Movies.Count, 10);
+            Assert.True(result.Movies.Exists(m => m.Id == 31663));
+            Assert.Equal(result.Movies.Find(m => m.Id == 31663).Description, "Lorem Ipsum");
+            Assert.Equal(result.Movies.Find(m => m.Id == 31660).BackgroundImage, "https://yts.mx/assets/images/movies/the_kings_case_note_2017/background.jpg");
+            Assert.Equal(result.Movies.Find(m => m.Id == 31661).YoutubeTrailerCode, "https://youtu.be/");
         }
 
         [Fact]
@@ -101,12 +101,12 @@ namespace MoviesApi.Tests.Movies.Infrastructure
 
             var result = await moviesApiRepository.SearchByCriteria(criteria);
             Assert.NotNull(result);
-            Assert.Equal(result.Count, 1);
-            Assert.True(result.Exists(m => m.Id == 31659));
-            Assert.Equal(result.Find(m => m.Id == 31659).Title, "When Today Ends");
-            Assert.Equal(result.Find(m => m.Id == 31659).Description, "Lorem Ipsum");
-            Assert.Equal(result.Find(m => m.Id == 31659).BackgroundImage, "https://yts.mx/assets/images/movies/when_today_ends_2021/background.jpg");
-            Assert.Equal(result.Find(m => m.Id == 31659).YoutubeTrailerCode, "https://youtu.be/");
+            Assert.Equal(result.Movies.Count, 1);
+            Assert.True(result.Movies.Exists(m => m.Id == 31659));
+            Assert.Equal(result.Movies.Find(m => m.Id == 31659).Title, "When Today Ends");
+            Assert.Equal(result.Movies.Find(m => m.Id == 31659).Description, "Lorem Ipsum");
+            Assert.Equal(result.Movies.Find(m => m.Id == 31659).BackgroundImage, "https://yts.mx/assets/images/movies/when_today_ends_2021/background.jpg");
+            Assert.Equal(result.Movies.Find(m => m.Id == 31659).YoutubeTrailerCode, "https://youtu.be/");
         }
 
         [Fact]
@@ -134,7 +134,7 @@ namespace MoviesApi.Tests.Movies.Infrastructure
 
             var result = await moviesApiRepository.SearchByCriteria(criteria);
             Assert.NotNull(result);
-            Assert.Equal(result.Count, 0);
+            Assert.Equal(result.MovieCount, 0);
         }
     }
 }

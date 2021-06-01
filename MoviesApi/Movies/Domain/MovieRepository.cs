@@ -5,8 +5,8 @@ namespace MoviesApi.Movies.Domain
 {
     interface MovieRepository
     {
-        Task<List<Movie>> SearchAll();
+        Task<DataMovie> SearchAll();
 
-        Task<List<Movie>> SearchByCriteria(Criteria criteria);
+        Task<DataMovie> SearchByCriteria(Criteria criteria);
     }
 }
