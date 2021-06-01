@@ -42,9 +42,9 @@ namespace MoviesApi.Controllers
             if (filters == null)
                 return null;
             var filterMapped = filters.Select(filter => new Filter(){
-                FilterField = filter.FilterField,
-                FilterOperator = filter.FilterOperator,
-                FilterValue = filter.FilterValue
+                FilterField = filter.Field,
+                FilterOperator = filter.Operator,
+                FilterValue = filter.Value
             }).ToList();
 
             return filterMapped;
