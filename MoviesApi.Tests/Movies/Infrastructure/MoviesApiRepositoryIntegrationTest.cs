@@ -40,6 +40,7 @@ namespace MoviesApi.Tests.Movies.Infrastructure
             var result = await moviesApiRepository.SearchAll();
 
             Assert.NotNull(result);
+            Assert.Equal(result.MovieCount, 30905);
             Assert.Equal(result.Movies.Count, 1);
             Assert.True(result.Movies.Exists(m => m.Id == 31506));
             Movie movie = result.Movies.Find(m => m.Id == 31506);
@@ -70,6 +71,7 @@ namespace MoviesApi.Tests.Movies.Infrastructure
 
             var result = await moviesApiRepository.SearchByCriteria(criteria);
             Assert.NotNull(result);
+            Assert.Equal(result.MovieCount, 31051);
             Assert.Equal(result.Movies.Count, 10);
             Assert.True(result.Movies.Exists(m => m.Id == 31663));
             Assert.Equal(result.Movies.Find(m => m.Id == 31663).Description, "Lorem Ipsum");
@@ -101,6 +103,7 @@ namespace MoviesApi.Tests.Movies.Infrastructure
 
             var result = await moviesApiRepository.SearchByCriteria(criteria);
             Assert.NotNull(result);
+            Assert.Equal(result.MovieCount, 31051);
             Assert.Equal(result.Movies.Count, 1);
             Assert.True(result.Movies.Exists(m => m.Id == 31659));
             Assert.Equal(result.Movies.Find(m => m.Id == 31659).Title, "When Today Ends");
@@ -134,7 +137,8 @@ namespace MoviesApi.Tests.Movies.Infrastructure
 
             var result = await moviesApiRepository.SearchByCriteria(criteria);
             Assert.NotNull(result);
-            Assert.Equal(result.MovieCount, 0);
+            Assert.Equal(result.MovieCount, 31051);
+            Assert.Equal(result.Movies.Count, 0);
         }
     }
 }

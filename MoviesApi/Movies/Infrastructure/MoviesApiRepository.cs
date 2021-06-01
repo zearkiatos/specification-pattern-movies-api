@@ -55,7 +55,6 @@ namespace MoviesApi.Movies.Infrastructure
             try
             {
                 ResponseMovie responseMovie = new ResponseMovie();
-                DataMovie data = new DataMovie();
                 HttpResponseMessage response = new HttpResponseMessage();
 
                 response = await this.client.GetAsync($"list_movies.json?${this.QueryMapper(criteria)}");
@@ -65,10 +64,10 @@ namespace MoviesApi.Movies.Infrastructure
 
                     responseMovie = JsonConvert.DeserializeObject<ResponseMovie>(jsonStr);
 
-                    data.Movies = criteria.HasFilters() ? await FilterFieldMapper(responseMovie.Data.Movies, criteria.Filters) : responseMovie.Data.Movies;
+                    responseMovie.Data.Movies = criteria.HasFilters() ? await FilterFieldMapper(responseMovie.Data.Movies, criteria.Filters) : responseMovie.Data.Movies;
 
                 }
-                return await Task.Run(() => { return data; });
+                return await Task.Run(() => { return responseMovie.Data; });
             }
             catch (HttpRequestException ex)
             {
