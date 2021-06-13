@@ -13,6 +13,7 @@ heroku login
 
 **Step 3**
 - Push Application in heroku
+heroku container:login
 heroku container:push web --app sp-movies-api
 
 **Step 4**
