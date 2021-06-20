@@ -26,7 +26,7 @@ namespace MoviesApi.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("ByCriterial")]
         public async Task<IActionResult> GetByCriterial([FromBody] CriterialRequest criterialRequest)
         {
